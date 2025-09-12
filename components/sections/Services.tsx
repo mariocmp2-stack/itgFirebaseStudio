@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, Variants, useScroll, useTransform } from "framer-motion";
+import {useTranslations} from 'next-intl';
 
 // Function to get tech icons
 const getTechIcon = (techName: string) => {
@@ -145,17 +146,16 @@ type Service = {
   tags: string[]; // chips visuales
 };
 
-const services: Service[] = [
+const getServices = (t: (key: string) => string): Service[] => [
   {
     id: "mobile",
-    title: "Mobile Applications",
-    desc:
-      "We develop native and hybrid apps focused on performance, UX and analytics. App Store and Play Store publication included.",
+    title: t('mobileTitle'),
+    desc: t('mobileDesc'),
     bullets: [
-      "Flutter / Kotlin / Swift",
-      "Effective onboarding and paywalls",
-      "Push notifications and deep links",
-      "Analytics (GA4, Firebase, Segment)",
+      t('mobileBullet1'),
+      t('mobileBullet2'),
+      t('mobileBullet3'),
+      t('mobileBullet4'),
     ],
     image: "/services/mobile-apps.png",
     imageFit: "cover",
@@ -165,14 +165,13 @@ const services: Service[] = [
   },
   {
     id: "landing",
-    title: "High-performance Landing Pages",
-    desc:
-      "Pages that load in <1s, optimized for Core Web Vitals and ready to convert with A/B testing and technical SEO.",
+    title: t('landingTitle'),
+    desc: t('landingDesc'),
     bullets: [
-      "Conversion-oriented design",
-      "Core Web Vitals 90+",
-      "CRM / Email integration",
-      "A/B testing and heatmaps",
+      t('landingBullet1'),
+      t('landingBullet2'),
+      t('landingBullet3'),
+      t('landingBullet4'),
     ],
     image: "/services/landing-page.png",
     imageFit: "cover",
@@ -182,14 +181,13 @@ const services: Service[] = [
   },
   {
     id: "automation",
-    title: "n8n Automations",
-    desc:
-      "We connect your tools and eliminate repetitive tasks: from leads and payments to reports and notifications.",
+    title: t('automationTitle'),
+    desc: t('automationDesc'),
     bullets: [
-      "Visual workflows in n8n",
-      "Integration with Stripe, Notion, Slack, Google",
-      "Reliable webhooks and queues",
-      "Monitoring and alerts",
+      t('automationBullet1'),
+      t('automationBullet2'),
+      t('automationBullet3'),
+      t('automationBullet4'),
     ],
     image: "/services/n8n.png",
     imageFit: "contain",
@@ -199,14 +197,13 @@ const services: Service[] = [
   },
   {
     id: "webapp",
-    title: "Aplicaciones web a medida",
-    desc:
-      "SaaS, paneles administrativos y sistemas internos usando Next.js con arquitectura escalable y segura.",
+    title: t('webAppTitle'),
+    desc: t('webAppDesc'),
     bullets: [
-      "Next.js + API Routes",
-      "Autenticación y roles",
-      "Tablas, filtros, exportaciones",
-      "Infra lista para escalar",
+      t('webAppBullet1'),
+      t('webAppBullet2'),
+      t('webAppBullet3'),
+      t('webAppBullet4'),
     ],
     image: "/services/web-app.png",
     imageFit: "cover",
@@ -231,6 +228,8 @@ const imgIn: Variants = {
 };
 
 export default function Services() {
+  const t = useTranslations('Services');
+  const services = getServices(t);
   const [active, setActive] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(0);
   const sentinelsRef = useRef<Array<HTMLDivElement | null>>([]);
@@ -274,7 +273,7 @@ export default function Services() {
   useEffect(() => {
     const interval = setInterval(nextSlide, 6000); // 6 seconds
     return () => clearInterval(interval);
-  }, []);
+  }, [nextSlide]);
 
   const current = services[active];
   const fitDesktop = current.imageFit === "contain" ? "object-contain" : "object-cover";
@@ -307,13 +306,12 @@ export default function Services() {
         className="mb-10 md:mb-16 text-center md:text-left"
       >
         <motion.h2 variants={textIn} className="text-2xl md:text-4xl font-bold tracking-tight">
-          Services that accelerate your{" "}
-          <span className="bg-gradient-to-r from-itg-blue to-itg-blueLight bg-clip-text text-transparent">
-            time-to-value
-          </span>
+          {t.rich('title', {
+            timeToValue: (chunks) => <span className="bg-gradient-to-r from-itg-blue to-itg-blueLight bg-clip-text text-transparent">{chunks}</span>
+          })}
         </motion.h2>
         <motion.p variants={textIn} className="mt-3 text-itg-gray max-w-2xl mx-auto md:mx-0">
-          Scroll and discover each solution: the detail is revealed in the center with a related image.
+          {t('subtitle')}
         </motion.p>
       </motion.div>
 
@@ -364,7 +362,7 @@ export default function Services() {
             </div>
 
             <div className="mt-3 text-sm text-itg-gray">
-              {active + 1} / {services.length} — {current.title}
+              {t('serviceCounter', {active: active + 1, total: services.length, title: current.title})}
             </div>
           </div>
         </div>
@@ -396,7 +394,7 @@ export default function Services() {
                     <motion.ul
                       variants={listIn}
                       className="mt-6 flex flex-wrap gap-2"
-                      aria-label="Tecnologías y características"
+                      aria-label={t('techAndFeats')}
                     >
                       {current.tags.map((t) => (
                         <motion.li
@@ -436,7 +434,7 @@ export default function Services() {
               className="flex transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
-              {services.map((service, index) => {
+              {services.map((service) => {
                 const fitMobile = service.imageFit === "contain" ? "object-contain" : "object-cover";
                 const padMobile = service.imageFit === "contain" ? "p-6" : "";
                 
@@ -516,7 +514,7 @@ export default function Services() {
             <button
               onClick={prevSlide}
               className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
-              aria-label="Anterior"
+              aria-label={t('previous')}
             >
               <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -526,7 +524,7 @@ export default function Services() {
             <button
               onClick={nextSlide}
               className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
-              aria-label="Siguiente"
+              aria-label={t('next')}
             >
               <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -545,7 +543,7 @@ export default function Services() {
                     ? 'bg-itg-blue w-8' 
                     : 'bg-gray-300 hover:bg-gray-400'
                 }`}
-                aria-label={`Slide ${index + 1}`}
+                aria-label={t('slide', {index: index + 1})}
               />
             ))}
           </div>
@@ -553,7 +551,7 @@ export default function Services() {
           {/* Counter */}
           <div className="text-center mt-4">
             <span className="text-sm text-itg-gray">
-              {currentSlide + 1} de {services.length}
+              {t('counter', {current: currentSlide + 1, total: services.length})}
             </span>
           </div>
         </div>

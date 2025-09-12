@@ -3,28 +3,31 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-
-const nav = [
-  { href: "#servicios", label: "Services" },
-  { href: "#proceso",   label: "Process"   },
-  { href: "#trabajos",  label: "Work"  },
-];
-
-const services = [
-  { href: "#servicios", label: "Mobile Apps" },
-  { href: "#servicios", label: "Landing Pages" },
-  { href: "#servicios", label: "n8n Automations" },
-  { href: "#servicios", label: "Web Apps" },
-];
-
-const socials = [
-  { href: "mailto:hola@itg.dev",      label: "Email",     icon: MailIcon     },
-  { href: "https://www.linkedin.com/",label: "LinkedIn",  icon: LinkedInIcon },
-  { href: "https://github.com/",      label: "GitHub",    icon: GitHubIcon   },
-];
+import {useTranslations} from 'next-intl';
 
 export default function Footer() {
+  const t = useTranslations('Footer');
+  const tNav = useTranslations('NavBar');
   const year = new Date().getFullYear();
+
+  const nav = [
+    { href: "#servicios", label: tNav('services') },
+    { href: "#proceso",   label: tNav('process')   },
+    { href: "#trabajos",  label: tNav('work')  },
+  ];
+
+  const services = [
+    { href: "#servicios", label: tNav('mobileApps') },
+    { href: "#servicios", label: tNav('landingPages') },
+    { href: "#servicios", label: tNav('n8nAutomations') },
+    { href: "#servicios", label: tNav('webApps') },
+  ];
+
+  const socials = [
+    { href: "mailto:hola@itg.dev",      label: t('emailAria'),     icon: MailIcon     },
+    { href: "https://www.linkedin.com/",label: t('linkedinAria'),  icon: LinkedInIcon },
+    { href: "https://github.com/",      label: t('githubAria'),    icon: GitHubIcon   },
+  ];
 
   return (
     <footer className="relative mt-24 border-t border-itg-border bg-white">
@@ -45,14 +48,12 @@ export default function Footer() {
         <div className="my-10 rounded-2xl border border-itg-border bg-white/80 p-5 shadow-sm backdrop-blur md:my-12 md:flex md:items-center md:justify-between">
           <div className="max-w-2xl">
             <h3 className="text-lg font-semibold text-itg-ink md:text-xl">
-              Ready to build something clear, fast and measurable?
+              {t('ctaTitle')}
             </h3>
-            <p className="mt-1 text-sm text-itg-gray">
-              Tell us about your challenge and in <strong>24–48h</strong> we&apos;ll propose the plan.
-            </p>
+            <p className="mt-1 text-sm text-itg-gray" dangerouslySetInnerHTML={{ __html: t('ctaSubtitle') }} />
           </div>
           <div className="mt-4 flex gap-2 md:mt-0">
-            <a href="/contact" className="btn btn-primary rounded-full">Contact Us</a>
+            <Link href="/contact" className="btn btn-primary rounded-full">{t('contactUs')}</Link>
           </div>
         </div>
       </motion.div>
@@ -72,8 +73,7 @@ export default function Footer() {
               <span className="text-lg font-semibold tracking-tight">ITG Solutions</span>
             </Link>
             <p className="mt-3 max-w-xs text-sm text-itg-gray">
-              IT solutions focused on performance, UX and automation:
-              mobile, web and n8n flows.
+              {t('description')}
             </p>
 
             {/* Socials */}
@@ -103,9 +103,9 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="md:col-span-3"
-            aria-label="Navegación principal"
+            aria-label={t('navigation')}
           >
-            <h4 className="text-sm font-semibold text-itg-ink">Navegación</h4>
+            <h4 className="text-sm font-semibold text-itg-ink">{t('navigation')}</h4>
             <ul className="mt-3 grid gap-2 text-sm">
               {nav.map((n) => (
                 <li key={n.href}>
@@ -124,7 +124,7 @@ export default function Footer() {
             viewport={{ once: true }}
             className="md:col-span-3"
           >
-            <h4 className="text-sm font-semibold text-itg-ink">Services</h4>
+            <h4 className="text-sm font-semibold text-itg-ink">{t('services')}</h4>
             <ul className="mt-3 grid gap-2 text-sm">
               {services.map((n) => (
                 <li key={n.label}>
@@ -143,14 +143,14 @@ export default function Footer() {
             viewport={{ once: true }}
             className="not-italic md:col-span-2"
           >
-            <h4 className="text-sm font-semibold text-itg-ink">Contact</h4>
+            <h4 className="text-sm font-semibold text-itg-ink">{t('contact')}</h4>
             <ul className="mt-3 grid gap-2 text-sm">
               <li>
                 <a href="mailto:hola@itg.dev" className="text-itg-gray hover:text-itg-ink">
                   hola@itg.dev
                 </a>
               </li>
-              <li className="text-itg-gray">Business hours: Mon-Fri 9:00–18:00</li>
+              <li className="text-itg-gray">{t('businessHours')}</li>
             </ul>
           </motion.address>
         </div>
@@ -161,18 +161,18 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-4 flex flex-col items-start justify-between gap-3 md:flex-row md:items-center">
           <p className="text-xs text-itg-gray">
-            © {year} ITG Solutions. All rights reserved.
+            {t('rights', {year})}
           </p>
           <div className="flex gap-4 text-xs">
-            <Link href="#" className="text-itg-gray hover:text-itg-ink">Términos</Link>
-            <Link href="#" className="text-itg-gray hover:text-itg-ink">Privacidad</Link>
+            <Link href="#" className="text-itg-gray hover:text-itg-ink">{t('terms')}</Link>
+            <Link href="#" className="text-itg-gray hover:text-itg-ink">{t('privacy')}</Link>
           </div>
         </div>
       </div>
 
       {/* Back to top */}
       <button
-        aria-label="Go to top"
+        aria-label={t('goToTop')}
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         className="group fixed bottom-6 right-6 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-itg-border bg-white/90 text-itg-ink shadow-md backdrop-blur transition hover:bg-white"
       >

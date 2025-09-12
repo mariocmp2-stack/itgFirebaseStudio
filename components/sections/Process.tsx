@@ -8,6 +8,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
+import {useTranslations} from 'next-intl';
 
 type Step = {
   id: string;
@@ -23,19 +24,18 @@ type Step = {
   icon?: string;
 };
 
-const steps: Step[] = [
+const getSteps = (t: (key: string) => string): Step[] => [
   {
     id: "discover",
-    title: "1) Discovery",
-    desc:
-      "We align objectives, audience and constraints. We prioritize features by impact/effort and define success metrics.",
+    title: t('discoverTitle'),
+    desc: t('discoverDesc'),
     bullets: [
-      "Kickoff + stakeholder mapping",
-      "KPIs and technical brief definition",
-      "Prioritized initial backlog",
-      "Sprint / milestone plan",
+      t('discoverBullet1'),
+      t('discoverBullet2'),
+      t('discoverBullet3'),
+      t('discoverBullet4'),
     ],
-    duration: "2–5 days",
+    duration: t('discoverDuration'),
     image: "/process/discovery.png",
     imageFit: "cover",
     wide: false,
@@ -45,16 +45,15 @@ const steps: Step[] = [
   },
   {
     id: "design",
-    title: "2) UX/UI & Content",
-    desc:
-      "High-fidelity prototypes and clear narrative. We design for conversion and accessibility, ready for development.",
+    title: t('designTitle'),
+    desc: t('designDesc'),
     bullets: [
-      "Wireframes → hi-fi prototypes",
-      "UI kit, design tokens and states",
-      "Conversion-oriented copy",
-      "Accessibility (WCAG) base",
+      t('designBullet1'),
+      t('designBullet2'),
+      t('designBullet3'),
+      t('designBullet4'),
     ],
-    duration: "1–2 weeks",
+    duration: t('designDuration'),
     image: "/process/design.png",
     imageFit: "cover",
     wide: false,
@@ -64,16 +63,15 @@ const steps: Step[] = [
   },
   {
     id: "build",
-    title: "3) Development",
-    desc:
-      "We implement with Next.js, performance first and analytics ready. Solid integrations and continuous deployment.",
+    title: t('buildTitle'),
+    desc: t('buildDesc'),
     bullets: [
-      "Next.js + API Routes",
-      "Core Web Vitals 90+",
-      "Auth, roles and forms",
-      "CI/CD in Vercel",
+      t('buildBullet1'),
+      t('buildBullet2'),
+      t('buildBullet3'),
+      t('buildBullet4'),
     ],
-    duration: "2–6 weeks",
+    duration: t('buildDuration'),
     image: "/process/build.png",
     imageFit: "cover",
     wide: false,
@@ -83,16 +81,15 @@ const steps: Step[] = [
   },
   {
     id: "automate",
-    title: "4) Integrations & Automations",
-    desc:
-      "We connect CRM, payments and notifications. Workflows in n8n to remove repetitive tasks and gain traceability.",
+    title: t('automateTitle'),
+    desc: t('automateDesc'),
     bullets: [
-      "n8n with Stripe/Notion/Slack",
-      "Secure webhooks and queues",
-      "Monitoring and alerts",
-      "Status dashboards",
+      t('automateBullet1'),
+      t('automateBullet2'),
+      t('automateBullet3'),
+      t('automateBullet4'),
     ],
-    duration: "1–3 weeks",
+    duration: t('automateDuration'),
     image: "/process/n8n.png",
     imageFit: "contain",
     wide: true,
@@ -102,16 +99,15 @@ const steps: Step[] = [
   },
   {
     id: "launch",
-    title: "5) QA, Launch & Iteration",
-    desc:
-      "Functional and performance QA, controlled launch and continuous improvement cycles based on data.",
+    title: t('launchTitle'),
+    desc: t('launchDesc'),
     bullets: [
-      "e2e QA + Lighthouse",
-      "Feature flags / rollouts",
-      "Metrics dashboards",
-      "Optimization backlog",
+      t('launchBullet1'),
+      t('launchBullet2'),
+      t('launchBullet3'),
+      t('launchBullet4'),
     ],
-    duration: "1–2 weeks",
+    duration: t('launchDuration'),
     image: "/process/launch.jpg",
     imageFit: "cover",
     wide: false,
@@ -136,6 +132,8 @@ const imgIn: Variants = {
 };
 
 export default function Process() {
+  const t = useTranslations('Process');
+  const steps = getSteps(t);
   const [active, setActive] = useState(0);
   const sentinelsRef = useRef<Array<HTMLDivElement | null>>([]);
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -192,10 +190,10 @@ export default function Process() {
         className="mb-10 md:mb-16 text-center md:text-left"
       >
         <motion.h2 variants={textIn} className="text-2xl md:text-4xl font-bold tracking-tight">
-          A clear, fast and measurable process
+          {t('title')}
         </motion.h2>
         <motion.p variants={textIn} className="mt-3 text-itg-gray max-w-2xl mx-auto md:mx-0">
-          Each phase has concrete deliverables and limited timelines. Scroll and they will be revealed.
+          {t('subtitle')}
         </motion.p>
       </motion.div>
 
@@ -230,7 +228,7 @@ export default function Process() {
                     <motion.ul
                       variants={listIn}
                       className="mt-6 flex flex-wrap gap-2"
-                      aria-label="Herramientas y foco"
+                      aria-label={t('toolsAndFocus')}
                     >
                       {current.tags.map((t) => (
                         <motion.li
@@ -308,7 +306,7 @@ export default function Process() {
             </div>
 
             <div className="mt-3 text-sm text-itg-gray text-right">
-              {active + 1} / {steps.length} — {current.title.replace(/^\d\)\s*/, "")}
+              {t('stepCounter', {active: active + 1, total: steps.length, title: current.title.replace(/^\d\)\s*/, "")})}
             </div>
           </div>
         </div>

@@ -1,5 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
+import {useTranslations} from 'next-intl';
+import Link from 'next/link';
 
 type Item = {
   title: string;
@@ -8,14 +10,14 @@ type Item = {
   note: string;
 };
 
-const items: Item[] = [
-  { title: "High-performance Landing — Retail D2C", tag: "Landing", stat: "+52% conversion", note: "Next.js · Core Web Vitals <1s LCP" },
-  { title: "Booking Mobile App — Hospitality", tag: "Mobile App", stat: "4.8★ rating", note: "Flutter · Firebase · Push" },
-  { title: "Internal Dashboard — Operations", tag: "Web App", stat: "99.9% uptime", note: "Next.js · RBAC · Analytics" },
-  { title: "n8n Automations — Backoffice", tag: "Automation", stat: "×3 automated tasks", note: "n8n · Webhooks · Integrations" },
-];
-
 export default function Hero() {
+  const t = useTranslations('Hero');
+  const items: Item[] = [
+    { title: t('highPerformanceLanding'), tag: "Landing", stat: t('conversionStat'), note: t('nextjsNote') },
+    { title: t('bookingMobileApp'), tag: "Mobile App", stat: t('ratingStat'), note: t('flutterNote') },
+    { title: t('internalDashboard'), tag: "Web App", stat: t('uptimeStat'), note: t('rbacNote') },
+    { title: t('n8nAutomations'), tag: "Automation", stat: t('automatedTasksStat'), note: t('integrationsNote') },
+  ];
   return (
     <section id="hero" className="relative z-0 overflow-hidden">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 md:pt-24 lg:pt-28 pb-8 sm:pb-12 md:pb-16">
@@ -69,10 +71,9 @@ export default function Hero() {
                           initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
                         >
-                          FOR ALL YOUR{" "}
-                          <span className="bg-gradient-to-r from-itg-blue to-itg-blueLight bg-clip-text text-transparent">
-                            DIGITAL NEEDS
-                          </span>
+                          {t.rich('title', {
+                            digitalNeeds: (chunks) => <span className="bg-gradient-to-r from-itg-blue to-itg-blueLight bg-clip-text text-transparent">{chunks}</span>
+                          })}
                         </motion.h1>
 
                         <motion.p
@@ -91,8 +92,8 @@ export default function Hero() {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.1 }}
                         >
-                          <a href="/contact" className="btn btn-primary text-base px-4 py-2">Contact Us</a>
-                          <a href="#servicios" className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-base font-medium transition border border-white/20 text-white/90 hover:bg-white/10">Our services</a>
+                          <Link href="/contact" className="btn btn-primary text-base px-4 py-2">{t('contactUs')}</Link>
+                          <a href="#servicios" className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-base font-medium transition border border-white/20 text-white/90 hover:bg-white/10">{t('ourServices')}</a>
                         </motion.div>
 
                         {/* Métricas - 2x2 en móvil */}
@@ -103,10 +104,10 @@ export default function Hero() {
                           variants={{ show: { transition: { staggerChildren: 0.05 } } }}
                         >
                           {[
-                            ["+50%", "better conversion"],
-                            ["<1s", "first meaningful paint"],
-                            ["99.9%", "uptime"],
-                            ["x3", "task automation"],
+                            ["+50%", t('betterConversion')],
+                            ["<1s", t('firstMeaningfulPaint')],
+                            ["99.9%", t('uptime')],
+                            ["x3", t('taskAutomation')],
                           ].map(([k, v]) => (
                             <motion.div
                               key={k}
@@ -127,18 +128,18 @@ export default function Hero() {
                           <div className="h-1.5 sm:h-2 w-1.5 sm:w-2 rounded-full bg-itg-blue" />
                           <input
                             className="w-full bg-transparent text-xs sm:text-sm text-white/90 placeholder-white/50 outline-none"
-                            placeholder="Search work..."
+                            placeholder={t('searchWork')}
                             readOnly
                           />
                         </div>
 
                         {/* Tags - horizontal scroll en móvil */}
                         <div className="mt-2 sm:mt-3 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs overflow-x-auto scrollbar-hide pb-1">
-                          <span className="flex-shrink-0 rounded-lg bg-white/5 px-2 py-1 text-white/80">All</span>
-                          <span className="flex-shrink-0 rounded-lg bg-white/5 px-2 py-1 text-white/70">Case studies</span>
-                          <span className="flex-shrink-0 rounded-lg bg-itg-blue/40 px-2 py-1 text-white">Mobile</span>
-                          <span className="flex-shrink-0 rounded-lg bg-white/5 px-2 py-1 text-white/70">Web</span>
-                          <span className="flex-shrink-0 rounded-lg bg-itg-blue/40 px-2 py-1 text-white">Automations</span>
+                          <span className="flex-shrink-0 rounded-lg bg-white/5 px-2 py-1 text-white/80">{t('all')}</span>
+                          <span className="flex-shrink-0 rounded-lg bg-white/5 px-2 py-1 text-white/70">{t('caseStudies')}</span>
+                          <span className="flex-shrink-0 rounded-lg bg-itg-blue/40 px-2 py-1 text-white">{t('mobile')}</span>
+                          <span className="flex-shrink-0 rounded-lg bg-white/5 px-2 py-1 text-white/70">{t('web')}</span>
+                          <span className="flex-shrink-0 rounded-lg bg-itg-blue/40 px-2 py-1 text-white">{t('automations')}</span>
                         </div>
 
                         {/* Items list - menos items en móvil */}
@@ -172,18 +173,18 @@ export default function Hero() {
                         {/* Bottom bar - simplificado en móvil */}
                         <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-lg border border-white/10 bg-black/30 p-2 sm:px-3 sm:py-2">
                           <div className="flex items-center gap-1 sm:gap-1.5 text-white/80 text-[9px] sm:text-[10px] md:text-[11px] overflow-x-auto scrollbar-hide">
-                            <span className="flex-shrink-0 rounded-md border border-white/10 px-1.5 sm:px-2 py-0.5 sm:py-1">Discovery</span>
-                            <span className="flex-shrink-0 rounded-md border border-white/10 px-1.5 sm:px-2 py-0.5 sm:py-1">UX/UI</span>
-                            <span className="flex-shrink-0 rounded-md border border-white/10 px-1.5 sm:px-2 py-0.5 sm:py-1">Dev</span>
-                            <span className="flex-shrink-0 rounded-md border border-white/10 px-1.5 sm:px-2 py-0.5 sm:py-1">Launch</span>
+                            <span className="flex-shrink-0 rounded-md border border-white/10 px-1.5 sm:px-2 py-0.5 sm:py-1">{t('discovery')}</span>
+                            <span className="flex-shrink-0 rounded-md border border-white/10 px-1.5 sm:px-2 py-0.5 sm:py-1">{t('uxui')}</span>
+                            <span className="flex-shrink-0 rounded-md border border-white/10 px-1.5 sm:px-2 py-0.5 sm:py-1">{t('dev')}</span>
+                            <span className="flex-shrink-0 rounded-md border border-white/10 px-1.5 sm:px-2 py-0.5 sm:py-1">{t('launch')}</span>
                           </div>
                           <div className="flex items-center gap-1.5 sm:gap-2">
                             <a href="#trabajos" className="rounded-md bg-itg-blue/40 px-2 py-1 text-[10px] sm:text-xs font-medium text-white">
-                              Portfolio
+                              {t('portfolio')}
                             </a>
-                            <a href="/contact" className="rounded-md bg-white/5 px-2 py-1 text-[10px] sm:text-xs text-white/90">
-                              Get a quote
-                            </a>
+                            <Link href="/contact" className="rounded-md bg-white/5 px-2 py-1 text-[10px] sm:text-xs text-white/90">
+                              {t('getAQuote')}
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -198,7 +199,7 @@ export default function Hero() {
 
                 {/* Chin: visible solo en desktop */}
                 <div className="hidden lg:block mx-auto mt-2 w-[94%] rounded-b-xl border-t border-white/5 bg-gradient-to-b from-neutral-900/70 to-neutral-900/30 px-4 py-2 text-center text-[10px] tracking-[0.15em] text-white/50">
-                  ITG SOLUTIONS
+                  {t('itgSolutions')}
                 </div>
               </div>
             </div>
@@ -220,11 +221,11 @@ export default function Hero() {
             transition={{ duration: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3"
           >
-            <a href="/contact" className="w-full sm:w-auto btn btn-primary text-sm sm:text-base px-4 py-2">
-              Contact Us
-            </a>
+            <Link href="/contact" className="w-full sm:w-auto btn btn-primary text-sm sm:text-base px-4 py-2">
+              {t('contactUs')}
+            </Link>
             <a href="#servicios" className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm sm:text-base font-medium transition border border-white/20 text-white/90 hover:bg-white/10">
-              Our services
+              {t('ourServices')}
             </a>
           </motion.div>
         </div>

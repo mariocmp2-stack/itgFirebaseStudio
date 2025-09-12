@@ -2,14 +2,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import {useTranslations} from 'next-intl';
+import LanguageSwitcher from './LanguageSwitcher';
 
 type LinkItem = { href: string; label: string };
 
 export default function NavBar() {
+  const t = useTranslations('NavBar');
   const links: LinkItem[] = [
-    { href: "#servicios", label: "Services" },
-    { href: "#proceso", label: "Process" },
-    { href: "#work", label: "Work" },
+    { href: "#servicios", label: t('services') },
+    { href: "#proceso", label: t('process') },
+    { href: "#work", label: t('work') },
   ];
 
   const [active, setActive] = useState<string>("");
@@ -29,7 +32,7 @@ export default function NavBar() {
     );
     sections.forEach((s) => obs.observe(s));
     return () => obs.disconnect();
-  }, []);
+  }, [links]);
 
   // Switch to capsule when hero is not visible
   useEffect(() => {
@@ -70,7 +73,7 @@ export default function NavBar() {
               className={condensed ? "w-10 h-10 md:w-12 md:h-12" : "w-12 h-12 md:w-16 md:h-16"}
               priority
             />
-            <span className="text-base md:text-lg font-semibold tracking-tight">Solutions</span>
+            <span className="text-base md:text-lg font-semibold tracking-tight">{t('solutions')}</span>
           </Link>
 
           {/* DESKTOP: links + popover */}
@@ -85,10 +88,11 @@ export default function NavBar() {
 
           {/* CTA desktop */}
           {!condensed && (
-            <div className="hidden md:flex">
-              <a href="/contact" className="btn btn-primary rounded-full">
-                Contact Us
-              </a>
+            <div className="hidden md:flex items-center gap-4">
+              <LanguageSwitcher />
+              <Link href="/contact" className="btn btn-primary rounded-full">
+                {t('contact')}
+              </Link>
             </div>
           )}
 
@@ -107,9 +111,9 @@ export default function NavBar() {
               <PillLink key={l.href} item={l} active={active === l.href} compact />
             ))}
             <DesktopPopover compact />
-            <a href="/contact" className="btn btn-primary rounded-full h-10 px-4 ml-1">
-              Contact
-            </a>
+            <Link href="/contact" className="btn btn-primary rounded-full h-10 px-4 ml-1">
+              {t('contact')}
+            </Link>
           </div>
         </div>
       )}
@@ -160,6 +164,7 @@ function MobilePopover({ links }: { links: LinkItem[] }) {
   const [open, setOpen] = useState(false);
   const btnRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
+  const t = useTranslations('NavBar');
 
   useEffect(() => {
     function onClick(e: MouseEvent) {
@@ -213,15 +218,14 @@ function MobilePopover({ links }: { links: LinkItem[] }) {
 
 /* ---------- Desktop Popover ---------- */
 function DesktopPopover({
-  compact = false,
   placement = "under",
 }: {
-  compact?: boolean;
   placement?: "under" | "right";
 }) {
   const [open, setOpen] = useState(false);
   const btnRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
+  const t = useTranslations('NavBar');
 
   useEffect(() => {
     function onClick(e: MouseEvent) {
@@ -255,7 +259,7 @@ function DesktopPopover({
                    focus:outline-none focus-visible:ring-2 focus-visible:ring-itg-blue
                    focus-visible:ring-offset-2 focus-visible:ring-offset-white"
       >
-        Menu <span className="ml-2">▾</span>
+        {t('menu')} <span className="ml-2">▾</span>
       </button>
 
       {open && (
@@ -300,18 +304,19 @@ function MenuContent({
   desktop?: boolean;
   showNav?: boolean;
 }) {
+  const t = useTranslations('NavBar');
   return (
     <>
       {/* Solutions */}
       <div className="p-3">
         <div className="px-2 pb-1 text-[11px] font-semibold tracking-wide text-itg-gray/70">
-          SOLUTIONS
+          {t('solutions')}
         </div>
         <div className={desktop ? "grid grid-cols-2 divide-x divide-itg-border/70" : ""}>
           <div className="divide-y divide-itg-border/70">
             {[
-              { label: "Mobile Apps", desc: "Flutter / iOS / Android", href: "#services", icon: "📱" },
-              { label: "Landing Pages", desc: "Core Web Vitals + SEO", href: "#services", icon: "🚀" },
+              { label: t('mobileApps'), desc: t('mobileAppsDesc'), href: "#services", icon: "📱" },
+              { label: t('landingPages'), desc: t('landingPagesDesc'), href: "#services", icon: "🚀" },
             ].map((it) => (
               <a
                 key={it.label}
@@ -334,8 +339,8 @@ function MenuContent({
           {/* Column 2 (desktop only) */}
           <div className={desktop ? "divide-y divide-itg-border/70" : "hidden"}>
             {[
-              { label: "n8n Automations", desc: "CRM, payments, email", href: "#services", icon: "⚙️" },
-              { label: "Web Apps", desc: "SaaS / admin / Next.js", href: "#services", icon: "🖥️" },
+              { label: t('n8nAutomations'), desc: t('n8nAutomationsDesc'), href: "#services", icon: "⚙️" },
+              { label: t('webApps'), desc: t('webAppsDesc'), href: "#services", icon: "🖥️" },
             ].map((it) => (
               <a
                 key={it.label}
@@ -361,7 +366,7 @@ function MenuContent({
       {showNav && (
         <div className="px-3 pb-3">
           <div className="px-2 pb-1 pt-2 text-[11px] font-semibold tracking-wide text-itg-gray/70">
-            NAVIGATION
+            {t('navigation')}
           </div>
           <div className="grid gap-2 px-2">
             {links.map((l) => (
@@ -378,11 +383,16 @@ function MenuContent({
         </div>
       )}
 
+      {/* Language Switcher */}
+      <div className="p-3">
+        <LanguageSwitcher />
+      </div>
+
       {/* CTA */}
       <div className="border-t border-itg-border bg-white/70 p-3">
-        <a href="/contact" onClick={onClickItem} className="btn btn-primary w-full rounded-xl">
-          Contact Us
-        </a>
+        <Link href="/contact" onClick={onClickItem} className="btn btn-primary w-full rounded-xl">
+          {t('contact')}
+        </Link>
       </div>
     </>
   );

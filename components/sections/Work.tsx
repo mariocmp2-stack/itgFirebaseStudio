@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
+import {useTranslations} from 'next-intl';
 
 /* ---------- Types & Data ---------- */
 type Category = "web" | "mobile" | "automation" | "saas";
@@ -20,44 +21,44 @@ type WorkCase = {
   url: string;
 };
 
-const cases: WorkCase[] = [
+const getCases = (t: (key: string) => string): WorkCase[] => [
   {
     id: "pig-growth-control",
     category: "mobile",
-    title: "Pig Growth Control App",
-    subtitle: "Smart livestock management system",
-    desc: "Mobile application for tracking and monitoring pig growth for a Mexican livestock company. Features weight tracking, health records, and growth analytics.",
+    title: t('pigGrowthTitle'),
+    subtitle: t('pigGrowthSubtitle'),
+    desc: t('pigGrowthDesc'),
     cover: "/work/placeholder-mobile.jpg",
     coverFit: "cover",
     tint: "rgba(27,124,230,0.14)",
     stack: ["Flutter", "Firebase", "Charts", "SQLite"],
-    impact: [["95%", "tracking accuracy"], ["40%", "time saved"], ["4.7★", "user rating"]],
+    impact: [["95%", t('trackingAccuracy')], ["40%", t('timeSaved')], ["4.7★", t('userRating')]],
     url: "#pig-growth-app",
   },
   {
     id: "greenhouse-website",
     category: "web",
-    title: "GreenHouse Website",
-    subtitle: "Modern agricultural solutions platform",
-    desc: "Professional website for a greenhouse company showcasing sustainable farming solutions, product catalog, and agricultural services.",
+    title: t('greenhouseTitle'),
+    subtitle: t('greenhouseSubtitle'),
+    desc: t('greenhouseDesc'),
     cover: "/demos/miltonapage.png",
     coverFit: "cover",
     tint: "rgba(0,160,255,0.14)",
     stack: ["Next.js", "React", "Tailwind CSS", "Vercel"],
-    impact: [["92", "PageSpeed"], ["<1.2s", "LCP"], ["+60%", "inquiries"]],
+    impact: [["92", t('pageSpeed')], ["<1.2s", t('lcp')], ["+60%", t('inquiries')]],
     url: "https://www.miltonagreenhouse.com/",
   },
   {
     id: "altiqpro-guatemala",
     category: "web",
-    title: "AltiqPro - Property Rentals",
-    subtitle: "Guatemalan real estate platform",
-    desc: "Complete real estate platform for AltiqPro, a Guatemalan property rental company. Features property listings, search filters, and rental management.",
+    title: t('altiqproTitle'),
+    subtitle: t('altiqproSubtitle'),
+    desc: t('altiqproDesc'),
     cover: "/demos/altiqpropage.png",
     coverFit: "cover",
     tint: "rgba(30,96,255,0.14)",
     stack: ["Next.js", "PostgreSQL", "Maps API", "Prisma"],
-    impact: [["85%", "lead quality"], ["99.8%", "uptime"], ["+120%", "bookings"]],
+    impact: [["85%", t('leadQuality')], ["99.8%", t('uptime')], ["+120%", t('bookings')]],
     url: "https://altiqpro.com/",
   },
 ];
@@ -108,6 +109,7 @@ interface BrowserMockupProps {
 }
 
 function BrowserMockup({ children, url, className = "" }: BrowserMockupProps) {
+  const t = useTranslations('Work');
   const [showIframe, setShowIframe] = useState(false); // Empezar con screenshot
   const [iframeError, setIframeError] = useState(false);
   const [loading, setLoading] = useState(false); // No empezar cargando
@@ -232,8 +234,8 @@ function BrowserMockup({ children, url, className = "" }: BrowserMockupProps) {
             <button
               onClick={handleRetry}
               className="p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded transition-colors"
-              title="Refresh iframe"
-              aria-label="Refresh iframe"
+              title={t('refreshIframe')}
+              aria-label={t('refreshIframe')}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -250,8 +252,8 @@ function BrowserMockup({ children, url, className = "" }: BrowserMockupProps) {
                   ? 'bg-green-100 text-green-600 hover:bg-green-200' 
                   : 'bg-blue-100 text-blue-600 hover:bg-blue-200'
               }`}
-              title={showIframe ? "Show screenshot" : "Show live site"}
-              aria-label={showIframe ? "Show screenshot" : "Show live site"}
+              title={showIframe ? t('showScreenshot') : t('showLiveSite')}
+              aria-label={showIframe ? t('showScreenshot') : t('showLiveSite')}
             >
               {showIframe ? (
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -271,7 +273,7 @@ function BrowserMockup({ children, url, className = "" }: BrowserMockupProps) {
             <button
               onClick={handleOpenSite}
               className="p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded transition-colors"
-              aria-label={`Open ${url} in new tab`}
+              aria-label={t('openInNewTab', {url})}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -294,7 +296,7 @@ function BrowserMockup({ children, url, className = "" }: BrowserMockupProps) {
                 <div className="bg-black/90 text-white px-6 py-3 rounded-xl text-sm font-medium flex items-center gap-3 transform scale-95 group-hover:scale-100 transition-transform shadow-2xl backdrop-blur-sm">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span>VIEW LIVE SITE</span>
+                    <span>{t('viewLiveSite')}</span>
                   </div>
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -306,11 +308,11 @@ function BrowserMockup({ children, url, className = "" }: BrowserMockupProps) {
               {/* Corner indicator con countdown */}
               <div className="absolute top-3 left-3 bg-blue-500 text-white px-3 py-1.5 rounded-full text-xs font-medium opacity-80 group-hover:opacity-100 transition-opacity">
                 <div className="flex items-center gap-1.5">
-                  <span>PREVIEW</span>
+                  <span>{t('preview')}</span>
                   {url && (
                     <>
                       <span>•</span>
-                      <span className="text-blue-100">Auto-loading live site...</span>
+                      <span className="text-blue-100">{t('autoLoading')}</span>
                     </>
                   )}
                 </div>
@@ -329,9 +331,9 @@ function BrowserMockup({ children, url, className = "" }: BrowserMockupProps) {
                     </div>
                   </div>
                   <div className="text-center">
-                    <p className="text-sm text-gray-600 mb-1 font-medium">Loading live site...</p>
+                    <p className="text-sm text-gray-600 mb-1 font-medium">{t('loadingLiveSite')}</p>
                     <p className="text-xs text-gray-500">
-                      {retryCount > 0 ? `Attempt ${retryCount + 1} of 3` : 'Optimizing for best experience'}
+                      {retryCount > 0 ? t('attempt', {count: retryCount + 1}) : t('optimizing')}
                     </p>
                     {/* Progress bar simulado */}
                     <div className="w-48 h-1 bg-gray-200 rounded-full mt-2 overflow-hidden">
@@ -347,7 +349,7 @@ function BrowserMockup({ children, url, className = "" }: BrowserMockupProps) {
                     onClick={() => {setLoading(false); setIframeError(true);}}
                     className="text-xs text-gray-500 hover:text-gray-700 underline transition-colors"
                   >
-                    Skip and show preview
+                    {t('skipAndShow')}
                   </button>
                 </div>
               </div>
@@ -371,7 +373,7 @@ function BrowserMockup({ children, url, className = "" }: BrowserMockupProps) {
             {!loading && (
               <div className="absolute top-3 right-3 bg-green-500 text-white px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 shadow-lg">
                 <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                LIVE SITE
+                {t('liveSite')}
               </div>
             )}
           </div>
@@ -383,9 +385,9 @@ function BrowserMockup({ children, url, className = "" }: BrowserMockupProps) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Unable to load live preview</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">{t('unableToLoad')}</h3>
               <p className="text-sm text-gray-600 mb-6">
-                This website cannot be embedded due to security policies or network restrictions.
+                {t('unableToLoadDesc')}
               </p>
               <div className="space-y-3">
                 <button
@@ -395,7 +397,7 @@ function BrowserMockup({ children, url, className = "" }: BrowserMockupProps) {
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
-                  <span>Open Full Site</span>
+                  <span>{t('openFullSite')}</span>
                 </button>
                 
                 <div className="flex gap-2">
@@ -403,13 +405,13 @@ function BrowserMockup({ children, url, className = "" }: BrowserMockupProps) {
                     onClick={handleRetry}
                     className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium"
                   >
-                    Try Again
+                    {t('tryAgain')}
                   </button>
                   <button
                     onClick={() => {setIframeError(false); setShowIframe(false);}}
                     className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium"
                   >
-                    Show Preview
+                    {t('showPreview')}
                   </button>
                 </div>
               </div>
@@ -476,19 +478,21 @@ function ProjectCard({ project, isSelected, onClick }: ProjectCardProps) {
 
 /* ---------- Main Component ---------- */
 export default function Work() {
+  const t = useTranslations('Work');
+  const cases = getCases(t);
   const [filter, setFilter] = useState<"all" | Category>("all");
   const [selectedProject, setSelectedProject] = useState(0);
 
   const filteredProjects = useMemo(
     () => filter === "all" ? cases : cases.filter(c => c.category === filter),
-    [filter]
+    [filter, cases]
   );
 
   const counts = useMemo(() => {
     const base = { all: cases.length, web: 0, mobile: 0, automation: 0, saas: 0 } as Record<"all" | Category, number>;
     cases.forEach(c => base[c.category]++);
     return base;
-  }, []);
+  }, [cases]);
 
   useEffect(() => {
     setSelectedProject(0);
@@ -497,11 +501,11 @@ export default function Work() {
   const currentProject = filteredProjects[selectedProject] || filteredProjects[0];
 
   const filterTabs = [
-    { key: "all" as const, label: "All Work", count: counts.all },
-    { key: "web" as const, label: "Web Apps", count: counts.web },
-    { key: "mobile" as const, label: "Mobile", count: counts.mobile },
-    { key: "automation" as const, label: "Automation", count: counts.automation },
-    { key: "saas" as const, label: "SaaS", count: counts.saas },
+    { key: "all" as const, label: t('allWork'), count: counts.all },
+    { key: "web" as const, label: t('webApps'), count: counts.web },
+    { key: "mobile" as const, label: t('mobile'), count: counts.mobile },
+    { key: "automation" as const, label: t('automation'), count: counts.automation },
+    { key: "saas" as const, label: t('saas'), count: counts.saas },
   ];
 
   return (
@@ -526,11 +530,12 @@ export default function Work() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Selected 
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Work</span>
+            {t.rich('title', {
+              work: (chunks) => <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">{chunks}</span>
+            })}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Explore our portfolio of impactful digital solutions. Each project showcases our commitment to quality and innovation.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -581,7 +586,7 @@ export default function Work() {
                   animate="visible"
                   className="space-y-4"
                   role="tabpanel"
-                  aria-label="Project list"
+                  aria-label={t('projectList')}
                 >
                   {filteredProjects.map((project, index) => (
                     <ProjectCard
@@ -664,7 +669,7 @@ export default function Work() {
                         {/* Tech Stack */}
                         <div>
                           <h4 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wide">
-                            Technology Stack
+                            {t('techStack')}
                           </h4>
                           <div className="flex flex-wrap gap-2">
                             {currentProject.stack.map((tech) => (
@@ -682,7 +687,7 @@ export default function Work() {
                       {/* Impact Metrics */}
                       <div>
                         <h4 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide">
-                          Project Impact
+                          {t('projectImpact')}
                         </h4>
                         <div className="grid grid-cols-1 gap-4">
                           {currentProject.impact.map(([value, label], index) => (

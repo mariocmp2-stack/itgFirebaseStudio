@@ -1,0 +1,117 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8fafc"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="70" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <!-- Logo -->
+  <rect x="60" y="15" width="120" height="40" rx="6" fill="#1d4ed8"/>
+  <text x="120" y="40" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">AltiqPro</text>
+  
+  <!-- Navigation -->
+  <rect x="520" y="22" width="80" height="26" rx="13" fill="#dbeafe"/>
+  <text x="560" y="38" text-anchor="middle" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="11">Propiedades</text>
+  <rect x="610" y="22" width="60" height="26" rx="13" fill="#dbeafe"/>
+  <text x="640" y="38" text-anchor="middle" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="11">Rentas</text>
+  <rect x="680" y="22" width="60" height="26" rx="13" fill="#1d4ed8"/>
+  <text x="710" y="38" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11">Contacto</text>
+  
+  <!-- Hero Section -->
+  <rect x="0" y="70" width="800" height="220" fill="#f1f5f9"/>
+  
+  <!-- Hero Content -->
+  <text x="80" y="130" fill="#1e293b" font-family="Arial, sans-serif" font-size="28" font-weight="bold">Propiedades Premium</text>
+  <text x="80" y="160" fill="#1e293b" font-family="Arial, sans-serif" font-size="28" font-weight="bold">en Guatemala</text>
+  <text x="80" y="190" fill="#64748b" font-family="Arial, sans-serif" font-size="14">Encuentra el hogar perfecto con servicios profesionales</text>
+  
+  <!-- Search Bar -->
+  <rect x="80" y="210" width="280" height="35" rx="6" fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+  <text x="95" y="230" fill="#9ca3af" font-family="Arial, sans-serif" font-size="12">Buscar por ubicación, precio...</text>
+  <rect x="370" y="215" width="70" height="25" rx="4" fill="#1d4ed8"/>
+  <text x="405" y="230" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11">Buscar</text>
+  
+  <!-- Property Visual -->
+  <g transform="translate(500, 110)">
+    <!-- Building 1 -->
+    <rect x="0" y="60" width="50" height="90" fill="#1d4ed8" opacity="0.8" rx="2"/>
+    <rect x="6" y="70" width="8" height="8" fill="#ffffff" opacity="0.9"/>
+    <rect x="18" y="70" width="8" height="8" fill="#ffffff" opacity="0.9"/>
+    <rect x="30" y="70" width="8" height="8" fill="#ffffff" opacity="0.9"/>
+    <rect x="6" y="85" width="8" height="8" fill="#ffffff" opacity="0.9"/>
+    <rect x="18" y="85" width="8" height="8" fill="#ffffff" opacity="0.9"/>
+    <rect x="30" y="85" width="8" height="8" fill="#ffffff" opacity="0.9"/>
+    <rect x="6" y="100" width="8" height="8" fill="#ffffff" opacity="0.9"/>
+    <rect x="18" y="100" width="8" height="8" fill="#ffffff" opacity="0.9"/>
+    <rect x="30" y="100" width="8" height="8" fill="#ffffff" opacity="0.9"/>
+    
+    <!-- Building 2 -->
+    <rect x="60" y="80" width="40" height="70" fill="#3b82f6" opacity="0.7" rx="2"/>
+    <rect x="65" y="88" width="6" height="6" fill="#ffffff" opacity="0.9"/>
+    <rect x="74" y="88" width="6" height="6" fill="#ffffff" opacity="0.9"/>
+    <rect x="83" y="88" width="6" height="6" fill="#ffffff" opacity="0.9"/>
+    <rect x="65" y="100" width="6" height="6" fill="#ffffff" opacity="0.9"/>
+    <rect x="74" y="100" width="6" height="6" fill="#ffffff" opacity="0.9"/>
+    <rect x="83" y="100" width="6" height="6" fill="#ffffff" opacity="0.9"/>
+    
+    <!-- Building 3 -->
+    <rect x="110" y="90" width="35" height="60" fill="#60a5fa" opacity="0.6" rx="2"/>
+    <rect x="115" y="98" width="5" height="5" fill="#ffffff" opacity="0.9"/>
+    <rect x="123" y="98" width="5" height="5" fill="#ffffff" opacity="0.9"/>
+    <rect x="131" y="98" width="5" height="5" fill="#ffffff" opacity="0.9"/>
+    <rect x="115" y="108" width="5" height="5" fill="#ffffff" opacity="0.9"/>
+    <rect x="123" y="108" width="5" height="5" fill="#ffffff" opacity="0.9"/>
+    <rect x="131" y="108" width="5" height="5" fill="#ffffff" opacity="0.9"/>
+  </g>
+  
+  <!-- Stats Bar -->
+  <rect x="0" y="290" width="800" height="60" fill="#dbeafe"/>
+  <text x="150" y="315" text-anchor="middle" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="24" font-weight="bold">85%</text>
+  <text x="150" y="330" text-anchor="middle" fill="#64748b" font-family="Arial, sans-serif" font-size="10">CALIDAD DE LEADS</text>
+  
+  <text x="300" y="315" text-anchor="middle" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="24" font-weight="bold">99.8%</text>
+  <text x="300" y="330" text-anchor="middle" fill="#64748b" font-family="Arial, sans-serif" font-size="10">UPTIME</text>
+  
+  <text x="450" y="315" text-anchor="middle" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="24" font-weight="bold">+120%</text>
+  <text x="450" y="330" text-anchor="middle" fill="#64748b" font-family="Arial, sans-serif" font-size="10">MÁS RESERVAS</text>
+  
+  <!-- Properties Section -->
+  <rect x="0" y="350" width="800" height="250" fill="#ffffff"/>
+  <text x="400" y="385" text-anchor="middle" fill="#1e293b" font-family="Arial, sans-serif" font-size="24" font-weight="bold">Propiedades Destacadas</text>
+  
+  <!-- Property Card 1 -->
+  <rect x="80" y="410" width="180" height="140" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="90" y="420" width="160" height="70" rx="4" fill="#dbeafe"/>
+  <!-- Mini buildings in card -->
+  <rect x="120" y="445" width="15" height="25" fill="#1d4ed8" opacity="0.7"/>
+  <rect x="140" y="450" width="12" height="20" fill="#3b82f6" opacity="0.6"/>
+  <rect x="155" y="455" width="10" height="15" fill="#60a5fa" opacity="0.5"/>
+  <text x="90" y="510" fill="#1e293b" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Apartamento Zona 10</text>
+  <text x="90" y="525" fill="#64748b" font-family="Arial, sans-serif" font-size="9">Guatemala City</text>
+  <text x="90" y="540" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Q. 8,500/mes • 2 hab</text>
+  
+  <!-- Property Card 2 -->
+  <rect x="310" y="410" width="180" height="140" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="320" y="420" width="160" height="70" rx="4" fill="#dbeafe"/>
+  <!-- Mini house in card -->
+  <rect x="360" y="445" width="20" height="15" fill="#1d4ed8" opacity="0.8"/>
+  <rect x="350" y="460" width="40" height="20" fill="#3b82f6" opacity="0.7"/>
+  <rect x="355" y="465" width="8" height="10" fill="#64748b"/>
+  <text x="320" y="510" fill="#1e293b" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Casa en Antigua</text>
+  <text x="320" y="525" fill="#64748b" font-family="Arial, sans-serif" font-size="9">Antigua Guatemala</text>
+  <text x="320" y="540" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Q. 15,000/mes • 4 hab</text>
+  
+  <!-- Property Card 3 -->
+  <rect x="540" y="410" width="180" height="140" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <rect x="550" y="420" width="160" height="70" rx="4" fill="#dbeafe"/>
+  <!-- Mini office in card -->
+  <rect x="590" y="440" width="25" height="30" fill="#1d4ed8" opacity="0.6"/>
+  <rect x="595" y="445" width="4" height="4" fill="#ffffff"/>
+  <rect x="601" y="445" width="4" height="4" fill="#ffffff"/>
+  <rect x="607" y="445" width="4" height="4" fill="#ffffff"/>
+  <rect x="595" y="452" width="4" height="4" fill="#ffffff"/>
+  <rect x="601" y="452" width="4" height="4" fill="#ffffff"/>
+  <rect x="607" y="452" width="4" height="4" fill="#ffffff"/>
+  <text x="550" y="510" fill="#1e293b" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Oficina Corporativa</text>
+  <text x="550" y="525" fill="#64748b" font-family="Arial, sans-serif" font-size="9">Zona 10</text>
+  <text x="550" y="540" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Q. 12,000/mes • 200m²</text>
+</svg>

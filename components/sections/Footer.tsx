@@ -4,211 +4,146 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-const nav = [
-  { href: "#servicios", label: "Services" },
-  { href: "#proceso",   label: "Process"   },
-  { href: "#trabajos",  label: "Work"  },
-];
-
-const services = [
-  { href: "#servicios", label: "Mobile Apps" },
-  { href: "#servicios", label: "Landing Pages" },
-  { href: "#servicios", label: "n8n Automations" },
-  { href: "#servicios", label: "Web Apps" },
-];
-
-const socials = [
-  { href: "mailto:hola@itg.dev",      label: "Email",     icon: MailIcon     },
-  { href: "https://www.linkedin.com/",label: "LinkedIn",  icon: LinkedInIcon },
-  { href: "https://github.com/",      label: "GitHub",    icon: GitHubIcon   },
-];
-
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-24 border-t border-itg-border bg-white">
-      {/* Halo sutil */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-20 left-1/2 h-40 w-[70%] -translate-x-1/2 rounded-full bg-gradient-to-r from-itg-blue/15 via-itg-blueLight/10 to-transparent blur-2xl"
-      />
-      <div className="absolute inset-0 bg-grid opacity-[.35] pointer-events-none" />
-
-      {/* Stripe CTA */}
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        className="section"
-      >
-        <div className="my-10 rounded-2xl border border-itg-border bg-white/80 p-5 shadow-sm backdrop-blur md:my-12 md:flex md:items-center md:justify-between">
-          <div className="max-w-2xl">
-            <h3 className="text-lg font-semibold text-itg-ink md:text-xl">
-              Ready to build something clear, fast and measurable?
-            </h3>
-            <p className="mt-1 text-sm text-itg-gray">
-              Tell us about your challenge and in <strong>24–48h</strong> we&apos;ll propose the plan.
-            </p>
-          </div>
-          <div className="mt-4 flex gap-2 md:mt-0">
-            <a href="/contact" className="btn btn-primary rounded-full">Contact Us</a>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Grid principal */}
-      <div className="section pb-10">
-        <div className="grid gap-10 md:grid-cols-12">
-          {/* Col 1: brand */}
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="md:col-span-4"
-          >
-            <Link href="/" className="flex items-center gap-3">
-              <Image src="/logo-itg.png" alt="ITG Solutions" width={42} height={42} className="h-10 w-10" />
-              <span className="text-lg font-semibold tracking-tight">ITG Solutions</span>
-            </Link>
-            <p className="mt-3 max-w-xs text-sm text-itg-gray">
-              IT solutions focused on performance, UX and automation:
-              mobile, web and n8n flows.
-            </p>
-
-            {/* Socials */}
-            <div className="mt-4 flex items-center gap-2">
-              {socials.map((s) => {
-                const Icon = s.icon;
-                const external = s.href.startsWith("http") || s.href.startsWith("mailto:");
-                return (
-                  <Link
-                    key={s.label}
-                    href={s.href}
-                    aria-label={s.label}
-                    target={external ? "_blank" : undefined}
-                    rel={external ? "noopener noreferrer" : undefined}
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-itg-border bg-white/80 text-itg-ink shadow-sm transition hover:border-itg-border/80 hover:bg-white"
-                  >
-                    <Icon className="h-4.5 w-4.5" />
-                  </Link>
-                );
-              })}
-            </div>
-          </motion.div>
-
-          {/* Col 2: navegación */}
-          <motion.nav
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="md:col-span-3"
-            aria-label="Navegación principal"
-          >
-            <h4 className="text-sm font-semibold text-itg-ink">Navegación</h4>
-            <ul className="mt-3 grid gap-2 text-sm">
-              {nav.map((n) => (
-                <li key={n.href}>
-                  <a href={n.href} className="text-itg-gray hover:text-itg-ink">
-                    {n.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.nav>
-
-          {/* Col 3: services */}
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="md:col-span-3"
-          >
-            <h4 className="text-sm font-semibold text-itg-ink">Services</h4>
-            <ul className="mt-3 grid gap-2 text-sm">
-              {services.map((n) => (
-                <li key={n.label}>
-                  <a href={n.href} className="text-itg-gray hover:text-itg-ink">
-                    {n.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Col 4: contact */}
-          <motion.address
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="not-italic md:col-span-2"
-          >
-            <h4 className="text-sm font-semibold text-itg-ink">Contact</h4>
-            <ul className="mt-3 grid gap-2 text-sm">
-              <li>
-                <a href="mailto:hola@itg.dev" className="text-itg-gray hover:text-itg-ink">
-                  hola@itg.dev
-                </a>
-              </li>
-              <li className="text-itg-gray">Business hours: Mon-Fri 9:00–18:00</li>
-            </ul>
-          </motion.address>
-        </div>
-
-        {/* Divider */}
-        <div className="mt-10 border-t border-itg-border/80" />
-
-        {/* Bottom bar */}
-        <div className="mt-4 flex flex-col items-start justify-between gap-3 md:flex-row md:items-center">
-          <p className="text-xs text-itg-gray">
-            © {year} ITG Solutions. All rights reserved.
+    <footer className="bg-gray-50 border-t border-gray-100">
+      {/* CTA Section */}
+      <div className="section py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center max-w-3xl mx-auto"
+        >
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+            Ready to Start Your Project?
+          </h3>
+          <p className="text-lg text-gray-600 mb-8">
+            Let&apos;s discuss your ideas and create something amazing together.
           </p>
-          <div className="flex gap-4 text-xs">
-            <Link href="#" className="text-itg-gray hover:text-itg-ink">Términos</Link>
-            <Link href="#" className="text-itg-gray hover:text-itg-ink">Privacidad</Link>
+          <a href="/contact" className="btn btn-primary text-lg px-8 py-4">
+            Get Started Today
+          </a>
+        </motion.div>
+      </div>
+
+      {/* Footer Content */}
+      <div className="border-t border-gray-200">
+        <div className="section py-12">
+          <div className="grid md:grid-cols-4 gap-8">
+            {/* Company Info */}
+            <div className="md:col-span-2">
+              <Link href="/" className="flex items-center gap-3 mb-4">
+                <Image 
+                  src="/logo-itg.png" 
+                  alt="ITG Solutions" 
+                  width={32} 
+                  height={32} 
+                  className="w-8 h-8" 
+                />
+                <span className="text-lg font-semibold text-gray-900">ITG Solutions</span>
+              </Link>
+              <p className="text-gray-600 mb-6 max-w-md">
+                We create digital solutions that drive real business results. 
+                From mobile apps to web applications and automation tools.
+              </p>
+              <div className="flex gap-4">
+                <a 
+                  href="mailto:hola@itg.dev" 
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                  aria-label="Email"
+                >
+                  <MailIcon className="w-5 h-5" />
+                </a>
+                <a 
+                  href="https://linkedin.com" 
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                  aria-label="LinkedIn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <LinkedInIcon className="w-5 h-5" />
+                </a>
+                <a 
+                  href="https://github.com" 
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                  aria-label="GitHub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <GitHubIcon className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+
+            {/* Services */}
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-4">Services</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#servicios" className="text-gray-600 hover:text-gray-900 transition-colors">Mobile Apps</a></li>
+                <li><a href="#servicios" className="text-gray-600 hover:text-gray-900 transition-colors">Web Applications</a></li>
+                <li><a href="#servicios" className="text-gray-600 hover:text-gray-900 transition-colors">Performance Optimization</a></li>
+                <li><a href="#servicios" className="text-gray-600 hover:text-gray-900 transition-colors">Automation Solutions</a></li>
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-4">Contact</h4>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <a href="mailto:hola@itg.dev" className="text-gray-600 hover:text-gray-900 transition-colors">
+                    hola@itg.dev
+                  </a>
+                </li>
+                <li className="text-gray-600">Mon-Fri 9:00-18:00</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-gray-200 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-gray-600">
+              © {year} ITG Solutions. All rights reserved.
+            </p>
+            <div className="flex gap-6 text-sm">
+              <Link href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
+                Terms of Service
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Back to top */}
-      <button
-        aria-label="Go to top"
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="group fixed bottom-6 right-6 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-itg-border bg-white/90 text-itg-ink shadow-md backdrop-blur transition hover:bg-white"
-      >
-        <ArrowUp className="h-4 w-4 transition group-hover:-translate-y-0.5" />
-      </button>
     </footer>
   );
 }
 
-/* --------- Iconos (SVG inline) --------- */
-function ArrowUp(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 19V5m0 0-6 6m6-6 6 6" />
-    </svg>
-  );
-}
+/* Icons */
 function MailIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16v12H4z" />
-      <path strokeLinecap="round" strokeLinejoin="round" d="m4 6 8 6 8-6" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
     </svg>
   );
 }
+
 function LinkedInIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-      <path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1 0-5ZM4.5 9h3v12h-3V9Zm6 0h2.9v1.64h.04c.4-.76 1.36-1.56 2.8-1.56 2.98 0 3.53 1.96 3.53 4.5V21h-3v-5.5c0-1.31-.02-3-1.84-3-1.84 0-2.12 1.43-2.12 2.9V21h-3V9Z" />
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
     </svg>
   );
 }
+
 function GitHubIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-      <path fillRule="evenodd" clipRule="evenodd" d="M12 .5a11.5 11.5 0 0 0-3.64 22.42c.58.11.79-.25.79-.56v-2c-3.23.7-3.91-1.56-3.91-1.56a3.08 3.08 0 0 0-1.28-1.7c-1.05-.72.08-.7.08-.7a2.44 2.44 0 0 1 1.78 1.2 2.47 2.47 0 0 0 3.39 1 2.47 2.47 0 0 1 .74-1.55c-2.58-.29-5.29-1.29-5.29-5.74A4.49 4.49 0 0 1 6.2 6.53a4.17 4.17 0 0 1 .11-3.07s.97-.31 3.18 1.18a10.98 10.98 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.22.78.23 1.6.03 2.38a4.49 4.49 0 0 1 1.2 3.1c0 4.46-2.71 5.45-5.3 5.74a2.77 2.77 0 0 1 .79 2.16v3.21c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z" />
+      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
     </svg>
   );
 }
